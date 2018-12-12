@@ -3,10 +3,19 @@
  * includes Vue and other libraries. It is a great starting point when
  * building robust, powerful web applications using Vue and Laravel.
  */
+import Vue from 'vue'
+import router from './router'
+import store from './store'
+import Vuetify from 'vuetify'
+
+Vue.use(Vuetify)
 
 require('./bootstrap');
 
 window.Vue = require('vue');
+
+// CSS
+import 'vuetify/dist/vuetify.min.css'
 
 /**
  * The following block of code may be used to automatically register your
@@ -16,10 +25,10 @@ window.Vue = require('vue');
  * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
  */
 
-// const files = require.context('./', true, /\.vue$/i)
-// files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key)))
+const files = require.context('./', true, /\.vue$/i)
+files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key)))
 
-Vue.component('example-component', require('./components/ExampleComponent.vue'));
+// Vue.component('example-component', require('./components/ExampleComponent.vue'));
 
 
 Vue.config.devtools = true
@@ -30,5 +39,7 @@ Vue.config.devtools = true
  */
 
 const app = new Vue({
-    el: '#app'
+    el: '#app',
+    router,
+    store
 });
